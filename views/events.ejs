@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Event Countdown</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon-container">
+      <i class='bx bx-menu'></i>
+      <h5> <%= username %>'s Events</h5>
+      <i class='bx bx-plus'></i>
+    </div>
+
+    <div class="side-menu">
+      <li>
+        <ul class="my-events"><i class='bx bx-calendar-event' ></i>My Events</ul>
+        <ul><i class='bx bx-crown'></i>Go Premium</ul>
+        <ul><i class='bx bx-user'></i>Profile</ul>
+        <ul><i class='bx bx-heart'></i>Rate Us</ul>
+        <ul><i class='bx bx-envelope'></i>Help & FAQs</ul>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button type="submit">Log out</button>
+      </form>
+        
+      </li>
+    </div>
+
+
+    <div class="event-tabs">
+      <div class="future-events future-events-num">Future (0)</div>
+      <div class="past-events past-events-num">Past (0)</div>
+    </div>
+
+    <div id="future-events-text" class="events-text"></div>
+    <div id="past-events-text" class="events-text"></div>
+
+
+    <div class="events-container">
+      <div class="future-events-container"></div>
+      <div class="past-events-container"></div>
+  </div>
+  
+  
+
+
+  
+
+
+
+
+      <dialog id="add-event-modal">
+        <div class="top-container">
+          <i class='bx bx-x'></i>
+          <p class="text">Add Event</p>
+          <button class="bx bx-check" id="addEventButton" disabled></button>
+        </div>
+
+        <div class="add-container">
+          <div class="titles-container">
+        <input class="color" type="color" id="color" name="color">
+        <div class="add-event-firstbox">
+        <label for="event-title"></label>
+        <input type="text" placeholder="Event Title" name="title" id="event-title"><br>
+        <label for="event-subtitle"></label>
+        <input type="text" placeholder="Subtitle (optional)" name="subtitle" id="event-subtitle">
+      </div>
+    </div>
+  </div>
+    <div class="add-container">
+    <div class="calendar-container">
+      <i class='bx bxs-calendar' ></i>
+      <input type="date" name="date" id="event-date">
+    </div>
+    </div>
+      </dialog>
+      
+    </div>
+
+
+    </div>
+
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+
+  </body>
+</html>
