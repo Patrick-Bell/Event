@@ -13,8 +13,8 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const updateEventStatus = require('./event-handle');
-const RedisStore = require('connect-redis')(session); // Import connect-redis and pass the session module to it
-const redis = require('redis');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 
 const bodyParser = require('body-parser')
 
@@ -43,24 +43,23 @@ initializePassport(
   }
 );
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }))
-
-
-
 app.set('view-engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json());
 app.use(flash());
 
-const redisClient = redis.createClient();
-
+const store = new MongoDBStore({
+  uri: process.env.MONGO_URI,
+  collection: 'sessions' // Specify the collection name for session storage
+});
 
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }), // Pass the Redis client to the RedisStore constructor
     secret: "sessionSecret",
     resave: false,
     saveUninitialized: false,
+    store: store
   })
 );
 
