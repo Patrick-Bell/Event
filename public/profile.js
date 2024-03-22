@@ -1,15 +1,15 @@
 const eventClick = document.querySelector('.events-show');
 const profileClick = document.querySelector('.profile-show');
-const customizationClick = document.querySelector('.customization-show')
+const customizationClick = document.querySelector('.customization-show');
 
 const profileTab = document.querySelector('.profile-tab');
-const eventTab = document.querySelector('.event-tab')
-const customizationTab = document.querySelector('.customization-tab')
+const eventTab = document.querySelector('.event-tab');
+const customizationTab = document.querySelector('.customization-tab');
 
 
 const futureEvents = document.getElementById('future-events');
 const pastEvents = document.getElementById('past-events');
-const totalEvents = document.getElementById('total-events')
+const totalEvents = document.getElementById('total-events');
 
 eventClick.addEventListener("click", () => {
     profileTab.style.display = "none";

@@ -12,7 +12,9 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
-const updateEventStatus = require('./event-handle')
+const updateEventStatus = require('./event-handle');
+const RedisStore = require('connect-redis')(session); // Import connect-redis and pass the session module to it
+const redis = require('redis');
 
 const bodyParser = require('body-parser')
 
@@ -50,9 +52,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view-engine', 'ejs');
 app.use(flash());
 
+const redisClient = redis.createClient();
+
 
 app.use(
   session({
+    store: new RedisStore({ client: redisClient }), // Pass the Redis client to the RedisStore constructor
     secret: "sessionSecret",
     resave: false,
     saveUninitialized: false,
