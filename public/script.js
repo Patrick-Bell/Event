@@ -567,20 +567,13 @@ const deleteProduct = async (eventId) => {
         const deletedEvent = response.data;
         console.log('Deleted event:', deletedEvent);
 
-        // Check if response status is 404 (Not Found)
-        if (response.status === 404) {
-            // Handle event not found error
-            console.error('Event not found:', deletedEvent.error);
-            // Optionally, show a message to the user
-        } else {
-            // Event deleted successfully, update UI
-            calculateFutureEvents();
-            calculatePastEvents();
-            renderFutureEvents();
-            renderPastEvents();
-            checkFutureEventsLength();
-            // Optionally, you can perform additional actions after deleting the event
-        }
+        // Event deleted successfully, update UI
+        calculateFutureEvents();
+        calculatePastEvents();
+        renderFutureEvents();
+        renderPastEvents();
+        checkFutureEventsLength();
+        // Optionally, you can perform additional actions after deleting the event
     } catch (error) {
         console.error('Error deleting event:', error);
         // Handle the error gracefully, such as showing a message to the user
