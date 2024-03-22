@@ -4,6 +4,7 @@ const openEventModal = document.querySelector('.bx-plus');
 const closeAddEventModal = document.querySelector('.bx-x');
 const addEventToList = document.querySelector('.bx-check');
 const myEventsIcon = document.querySelector('.my-events')
+const eventText = document.querySelector('.text')
 
 
 const futureEventsText = document.getElementById("future-events-text");
@@ -206,6 +207,10 @@ addEventToList.addEventListener("click", async () => {
     const subtitle = document.getElementById('event-subtitle').value;
     const date = document.getElementById('event-date').value;
 
+    closeAddEventModal.style.display = "none"
+    addEventToList.style.display = "none"
+    eventText.innerHTML = "Adding task..."
+
     const timeNow = new Date();
     console.log("Date string:", date); // Check the format of the date string
 
@@ -244,6 +249,7 @@ addEventToList.addEventListener("click", async () => {
             renderFutureEvents()
             calculateFutureEvents()
             calculatePastEvents()
+            resetEventForm()
             addEventModal.close();
         } else {
             console.error('Failed to save event. Unexpected status code:', res.status);
@@ -555,10 +561,15 @@ subtitleInput.addEventListener("input", checkValidationFields);
 
 // function to reset the form each time it is submitted
 
+const dateInput = document.getElementById('event-date')
+
 function resetEventForm() {
     titleInput.value = "";
     subtitleInput.value = "";
     dateInput.value = "";
+    closeAddEventModal.style.display = "block"
+    addEventToList.style.display = "block"
+    eventText.innerHTML = "Add Event"
 }
 
 const deleteProduct = async (eventId) => {
