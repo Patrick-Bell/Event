@@ -4,22 +4,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/auth.css">
+    <link rel="stylesheet" href="/profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Document</title>
 </head>
 <body>
+    <div class="profile-container">
+        <div class="profile-tab-1">
+            <img src="<%= image %>" alt="">
+            <p><%= username %></p>
 
-    <%= username %>
-    <%= email %>
-    <%= number %>
-    <%= birthday %>
-    <img src="<%= image %>">
-    <%= joined %>
-    
+            <div class="navigate profile-show">Profile</div>
+        <div class="navigate events-show">Events</div>
+        <div class="navigate customization-show">Customization</div>
+        <div class="navigate">Settings</div>
+        </div>
+        
+
+        <div class="profile-tab-2">
+            
+            <div class="profile-tab">
+                <div class="profile-info-container">
+                <h2>Profile</h2>
+                <div class="profile-info">
+                    <p>Name</p>
+                    <p><%= username %></p>
+                </div>
+                <div class="profile-info">
+                    <p>Email</p>
+                    <p><%= email %></p>
+                </div>
+                <div class="profile-info">
+                    <p>Number</p>
+                    <p><%= number %></p>
+                </div>
+                <div class="profile-info">
+                    <p>Birthday</p>
+                    <p><%= birthday %></p>
+                </div>
+                <div class="profile-info">
+                    <p>Joined</p>
+                    <p><%= joined %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-tab">
+            <div class="profile-info-container">
+            <h2>Events</h2>
+            <div class="profile-info">
+                <p>Past Events</p>
+                <p id="past-events"></p>
+            </div>
+            <div class="profile-info">
+                <p>Future Events</p>
+                <p id="future-events"></p>
+            </div>
+            <div class="profile-info">
+                <p>Total Events</p>
+                <p id="total-events"></p>
+            </div>
+        </div>
+        <a href="/events">View Events</a>
+    </div>
+
+    <div class="customization-tab">
+        <div class="profile-info-container">
+        <h2>Customization</h2>
+        <div class="profile-info">
+            <p>Turn on Notifications</p>
+            <input type="checkbox" checked>
+        </div>
+        <div class="profile-info">
+            <p>Light / Darkmode</p>
+            <i class=""></i>
+        </div>
+        <div class="profile-info">
+            <p>Another Settings</p>
+            <p>Turn on</p>
+        </div>
+    </div>
+</div>
 
 
 
 
+
+
+        </div>
+    </div>
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="profile.js"></script>
 </body>
 </html>

@@ -192,12 +192,10 @@ app.post('/api/events', async (req, res) => {
       createdBy,
       status
       })
-
-      updateEventStatus()
       // Save the event to the database
       const savedEvent = await newEvent.save()
-      updateEventStatus();
       console.log('Event saved successfully:', savedEvent); // Log the saved event
+      updateEventStatus()
       res.status(201).json(savedEvent);
   } catch (error) {
       console.error('Error creating event:', error); // Log any errors that occur
@@ -236,6 +234,5 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.listen(3000, () => {
-  updateEventStatus()
   console.log('Listening on port 3000');
 });

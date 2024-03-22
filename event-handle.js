@@ -29,7 +29,6 @@ const updateEventStatus = async () => {
     }
 
     // Schedule the next update after 30 minutes
-    setTimeout(updateEventStatus, 30 * 60 * 1000); // 30 minutes in milliseconds
 };
 
 // Immediately call the function to start the process
