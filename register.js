@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
       birthday: req.body.birthday,
       password: hashedPassword,
       email: req.body.email.toLowerCase(),
-      joined: new Date()
+      joined: new Date().toLocaleString()
     });
 
     await newUser.save();

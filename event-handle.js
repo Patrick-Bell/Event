@@ -1,4 +1,4 @@
-const EventModel = require('./models/event')
+const EventModel = require('./models/event');
 
 const updateEventStatus = async () => {
     try {
@@ -28,11 +28,16 @@ const updateEventStatus = async () => {
         console.error('Error updating event statuses:', error);
     }
 
-    // Schedule the next update after 30 minutes
+    // Schedule the next update for the next day at midnight
+    const now = new Date();
+    const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now;
+    setTimeout(updateEventStatus, millisTillMidnight);
 };
 
-// Immediately call the function to start the process
+// Start the initial update
 updateEventStatus();
 
 
-  module.exports = updateEventStatus
+// code for email reminder
+
+module.exports = updateEventStatus;

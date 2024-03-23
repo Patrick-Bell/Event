@@ -11,6 +11,7 @@
 }
 .profile-tab-1{
     background: rgb(29, 26, 26);
+    margin: 30px;
 }
 .profile-tab-2{
     background: rgb(46, 43, 46);
@@ -72,5 +73,8 @@ a{
     }
     h2{
         font-size: 1.7rem;
+    }
+    body{
+        background: black;
     }
 }
