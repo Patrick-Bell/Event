@@ -12,8 +12,9 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
-const updateEventStatus = require('./event-handle');
+const { updateEventStatus, sendEmailReminder } = require('./event-handle');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const nodemailer = require('nodemailer')
 
 
 const bodyParser = require('body-parser')
@@ -128,7 +129,7 @@ app.get('/api/past-events', async (req, res) => {
   }
 });
 
-app.get('/api/future-events', async (req, res) => {
+app.get('/api/future-events', checkAuthenticated, async (req, res) => {
   try {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId, status: 'future' });
@@ -179,9 +180,11 @@ app.delete('/logout', checkAuthenticated, (req, res) => {
 });
 
 
-app.post('/api/events', async (req, res) => {
+app.post('/api/events', checkAuthenticated, async (req, res) => {
   try {
     const createdBy = req.user._id;
+    const createdByUser = req.user.username
+    const createdByEmail = req.user.email
     const { id, title, subtitle, date, days, color, status } = req.body;
   
       console.log('Creating event:', req.body); // Log the event object before saving
@@ -194,12 +197,15 @@ app.post('/api/events', async (req, res) => {
       days,
       color,
       createdBy,
+      createdByUser,
+      createdByEmail,
       status
       })
       // Save the event to the database
       const savedEvent = await newEvent.save()
       console.log('Event saved successfully:', savedEvent); // Log the saved event
       updateEventStatus()
+      sendEmailReminder()
       res.status(201).json(savedEvent);
   } catch (error) {
       console.error('Error creating event:', error); // Log any errors that occur
@@ -207,7 +213,7 @@ app.post('/api/events', async (req, res) => {
   }
 });
 
-app.delete('/api/events/:id', async (req, res) => {
+app.delete('/api/events/:id', checkAuthenticated, async (req, res) => {
   const eventId = req.params.id;
   try {
     const result = await EventModel.deleteOne({ id: eventId})

@@ -24,6 +24,14 @@ const eventSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  createdByUser: {
+    type: String,
+    ref: 'User',
+  },
+  createdByEmail: {
+    type: String,
+    ref: 'User',
+  },
   status: {
     type: String,
     enum: ['past', 'future'],
