@@ -98,6 +98,8 @@ const sendEmailReminder = async () => {
     setTimeout(sendEmailReminder, millisTillMidnight)
 };
 
+sendEmailReminder()
+
 
 
 module.exports = { updateEventStatus, sendEmailReminder };

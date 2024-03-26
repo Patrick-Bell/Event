@@ -253,12 +253,16 @@ nav {
 .review__card {
   max-width: 600px;
   margin-inline: auto;
+  margin: 5px 0 5px 0;
   padding: 2rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: var(--primary-color)
 }
 
 .review__card img {
   margin-bottom: 1rem;
-  max-width: 150px;
+  max-width: 75px;
   margin-inline: auto;
   border-radius: 100%;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
@@ -279,7 +283,7 @@ nav {
 }
 
 .review__card p {
-  line-height: 1.75rem;
+  line-height: -1.75rem;
   color: var(--text-dark);
 }
 
@@ -324,6 +328,27 @@ nav {
 .footer__content p {
   color: var(--white);
 }
+
+
+.reviews-container{
+  display: block;
+}
+
+/* review card */
+.review-joined{
+  color: lightgrey;
+  font-size: 0.7rem;
+  margin-top: -10px;
+}
+.review-title{
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+.review-text{
+  font-size: 0.8rem;
+  line-height: -10px;
+}
+
 
 @media (width > 768px) {
   .section__container {
@@ -409,4 +434,27 @@ nav {
   .review__container {
     padding-block: 10rem 5rem;
   }
+}
+
+/* pagination swiper */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.5); /* Color of inactive bullets */
+  display: inline-block;
+  margin: 0 5px; /* Spacing between bullets */
+  border-radius: 50%; /* Make bullets round */
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #000; /* Color of active bullet */
 }

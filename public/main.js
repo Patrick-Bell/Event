@@ -48,7 +48,3 @@ ScrollReveal().reveal(".quality__content .quality__btn", {
   ...scrollRevealOption,
   delay: 1000,
 });
-
-const swiper = new Swiper(".swiper", {
-  loop: true,
-});

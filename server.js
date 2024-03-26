@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/user'); // Importing the User model
 const EventModel = require('./models/event')
+const ReviewModel = require('./models/review')
 const registerRouter = require('./register');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -22,6 +23,7 @@ const bodyParser = require('body-parser')
 const app = express();
 
 const initializePassport = require('./passport-config');
+const reviewModel = require('./models/review');
 initializePassport(
   passport,
   async (email) => {
@@ -107,7 +109,7 @@ app.get('/profile', checkAuthenticated, async (req, res) => {
 })
 
 
-app.get('/api/events', async (req, res) => {
+app.get('/api/events', checkAuthenticated, async (req, res) => {
   try {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId });
@@ -118,7 +120,7 @@ app.get('/api/events', async (req, res) => {
   }
 })
 
-app.get('/api/past-events', async (req, res) => {
+app.get('/api/past-events', checkAuthenticated, async (req, res) => {
   try {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId, status: 'past' });
@@ -140,7 +142,15 @@ app.get('/api/future-events', checkAuthenticated, async (req, res) => {
   }
 });
 
-
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await ReviewModel.find()
+    res.status(200).json(reviews)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Error'})
+  }
+});
 
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -179,6 +189,35 @@ app.delete('/logout', checkAuthenticated, (req, res) => {
   });
 });
 
+app.post('/api/reviews', checkAuthenticated, async (req, res) => {
+  try {
+    const createdBy = req.user._id;
+    const name = req.user.username;
+    const image = req.user.image;
+    const joined = req.user.joined
+    const {id, reviewTitle, reviewText, reviewRating, dateSubmitted } = req.body
+
+    console.log('Recieved Review', req.body)
+
+    const newReview = new ReviewModel({
+      id,
+      name,
+      image,
+      createdBy,
+      joined,
+      reviewTitle,
+      reviewText,
+      reviewRating,
+      dateSubmitted
+    })
+    console.log(newReview)
+    const saveReview = await newReview.save()
+    res.status(201).json(saveReview)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Error'})
+  }
+})
 
 app.post('/api/events', checkAuthenticated, async (req, res) => {
   try {
@@ -205,7 +244,6 @@ app.post('/api/events', checkAuthenticated, async (req, res) => {
       const savedEvent = await newEvent.save()
       console.log('Event saved successfully:', savedEvent); // Log the saved event
       updateEventStatus()
-      sendEmailReminder()
       res.status(201).json(savedEvent);
   } catch (error) {
       console.error('Error creating event:', error); // Log any errors that occur
@@ -214,7 +252,8 @@ app.post('/api/events', checkAuthenticated, async (req, res) => {
 });
 
 app.delete('/api/events/:id', checkAuthenticated, async (req, res) => {
-  const eventId = req.params.id;
+  const eventId = req.params.id
+  console.log('recieved this event to delete', eventId)
   try {
     const result = await EventModel.deleteOne({ id: eventId})
     if (result.deletedCount === 0) {

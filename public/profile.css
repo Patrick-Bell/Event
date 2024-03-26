@@ -50,12 +50,12 @@ h2{
     padding: 15px;
     border-radius: 4px;
 }
-.profile-tab, .event-tab, .customization-tab{
+.profile-tab, .event-tab, .customization-tab, .review-tab{
     margin: 30px;
     background: lightgrey;
     padding: 10px;
 }
-.event-tab, .customization-tab{
+.event-tab, .customization-tab, .review-tab{
     display: none;
 }
 a{
@@ -64,7 +64,42 @@ a{
     font-weight: 800;
     margin: auto auto;
 }
-
+.stars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+.review-container{
+    display: block;
+}
+textarea{
+    resize: none;
+    width: 90%;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+input{
+    width: 90%;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+}
+#submit-btn{
+    padding: 10px;
+    width: 30%;
+}
+.review-gold{
+    color: gold;
+}
+.review-title-error, .review-text-error{
+    margin-bottom: 5px;
+    padding: 7px 10px;
+    background: red;
+    color: white;
+    display: none;
+    width: 70%;
+  }
 
 
 @media screen and (max-width: 550px) {

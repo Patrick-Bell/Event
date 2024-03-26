@@ -5,6 +5,8 @@ const closeAddEventModal = document.querySelector('.bx-x');
 const addEventToList = document.querySelector('.bx-check');
 const myEventsIcon = document.querySelector('.my-events')
 const eventText = document.querySelector('.text')
+const deleteModal = document.getElementById('delete-modal');
+const deleteModalText = document.getElementById('delete-modal-text')
 
 
 const futureEventsText = document.getElementById("future-events-text");
@@ -118,7 +120,9 @@ function chooseColor(color) {
 
 }
 
-// function that checks if events length and generates relevant HTML
+// function that checks if events length and generates relevant HTML//
+
+/*
 
 const checkFutureEventsLength = async (userId) => {
     try {
@@ -160,6 +164,7 @@ const checkFutureEventsLength = async (userId) => {
 
 checkFutureEventsLength()
 
+*/
 
 
 // function to get a color 20% darker
@@ -244,7 +249,7 @@ addEventToList.addEventListener("click", async () => {
             console.log('Testing DB', res.data)
             chooseColor(event.color); // Update UI with chosen color
             sortEventsInOrder()
-            checkFutureEventsLength()
+            // checkFutureEventsLength()
             renderPastEvents()
             renderFutureEvents()
             calculateFutureEvents()
@@ -272,6 +277,39 @@ function generateRandomID() {
 
     return randomID.toString()
 }
+
+const hideModal = () => {
+    deleteModal.style.display = 'none';
+};
+
+
+const attachDeleteEventListeners = () => {
+    const trashIcons = document.querySelectorAll('.bx-trash');
+    trashIcons.forEach(trashIcon => {
+        // Check if event listener is already attached
+        if (!trashIcon.hasEventListener) {
+            trashIcon.hasEventListener = true; // Mark as attached
+            trashIcon.addEventListener('click', async () => {
+                deleteModal.showModal()
+                deleteModalText.innerHTML = `Deleting Event. Please wait.`;
+                const eventId = trashIcon.dataset.eventId;
+                try {
+                    await deleteProduct(eventId);
+                    deleteModal.showModal()
+                    trashIcon.parentElement.remove(); // Remove the event card from the DOM
+                    deleteModal.close()
+                } catch (error) {
+                    console.error('Error deleting event:', error);
+                    deleteModalText.innerHTML = `Error Deleting Event. Please refresh the page and try again.`;
+                    deleteModal.close()
+                    // Handle the error gracefully, such as showing a message to the user
+                }
+            });
+        }
+    });
+};
+
+
 
 
 const renderFutureEvents = async () => {
@@ -338,28 +376,11 @@ const renderFutureEvents = async () => {
             }
         });
         
-        const attachDeleteEventListeners = () => {
-            const trashIcons = document.querySelectorAll('.bx-trash');
-            trashIcons.forEach(trashIcon => {
-                trashIcon.addEventListener('click', async () => {
-                    const eventId = trashIcon.dataset.eventId;
-                    try {
-                        await deleteProduct(eventId);
-                        // Optionally, update the UI to reflect the deletion
-                        trashIcon.parentElement.remove(); // Remove the event card from the DOM
-                    } catch (error) {
-                        console.error('Error deleting event:', error);
-                        // Handle the error gracefully, such as showing a message to the user
-                    }
-                });
-            });
-        };
-        
         // Call the function to attach delete event listeners when the page loads
 
         sortEventsInOrder()
-        checkFutureEventsLength()
-        attachDeleteEventListeners();
+        attachDeleteEventListeners()
+        // checkFutureEventsLength()
         calculateFutureEvents()
         calculatePastEvents()   
 
@@ -434,28 +455,11 @@ const renderPastEvents = async (userId) => {
             }
         });
         
-        const attachDeleteEventListeners = () => {
-            const trashIcons = document.querySelectorAll('.bx-trash');
-            trashIcons.forEach(trashIcon => {
-                trashIcon.addEventListener('click', async () => {
-                    const eventId = trashIcon.dataset.eventId;
-                    try {
-                        await deleteProduct(eventId);
-                        // Optionally, update the UI to reflect the deletion
-                        trashIcon.parentElement.remove(); // Remove the event card from the DOM
-                    } catch (error) {
-                        console.error('Error deleting event:', error);
-                        // Handle the error gracefully, such as showing a message to the user
-                    }
-                });
-            });
-        };
-        
         // Call the function to attach delete event listeners when the page loads
 
         sortEventsInOrder()
         attachDeleteEventListeners();
-        checkFutureEventsLength()
+       //  checkFutureEventsLength()
         calculateFutureEvents()
         calculatePastEvents()   
 
@@ -577,13 +581,14 @@ const deleteProduct = async (eventId) => {
         const response = await axios.delete(`/api/events/${eventId}`);
         const deletedEvent = response.data;
         console.log('Deleted event:', deletedEvent);
+        console.log('Sending this event to delete to the server', eventId)
 
         // Event deleted successfully, update UI
         calculateFutureEvents();
         calculatePastEvents();
         renderFutureEvents();
         renderPastEvents();
-        checkFutureEventsLength();
+        // checkFutureEventsLength();
         // Optionally, you can perform additional actions after deleting the event
     } catch (error) {
         console.error('Error deleting event:', error);
