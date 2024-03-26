@@ -24,6 +24,7 @@ async function renderReviews() {
         const reviews = response.data;
         const reviewsContainer = document.getElementById('reviews-container');
         console.log('trying rendering reviews');
+        console.log(reviews)
         
 
         // Map through the reviews and create HTML for each review
