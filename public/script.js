@@ -310,8 +310,6 @@ const attachDeleteEventListeners = () => {
 };
 
 
-
-
 const renderFutureEvents = async () => {
     try {
         const response = await axios.get('/api/future-events');
