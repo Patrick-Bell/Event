@@ -12,6 +12,76 @@ const registerButton = document.querySelector("#register-btn");
 const confirmPasswordInput = document.getElementById('confirm-password');
 const confirmPasswordError = document.querySelector(".confirm-password-error");
 const showHidePassword = document.querySelector(".show_hide");
+const inputs = document.querySelectorAll(".input-field");
+const main = document.querySelector("main");
+const bullets = document.querySelectorAll(".bullets span");
+const images = document.querySelectorAll(".image");
+
+
+
+inputs.forEach((inp) => {
+  inp.addEventListener("focus", () => {
+    inp.classList.add("active");
+  });
+  inp.addEventListener("blur", () => {
+    if (inp.value != "") return;
+    inp.classList.remove("active");
+  });
+});
+
+// Function to move the slider
+function moveSlider(index) {
+    let currentImage = document.querySelector(`.img-${index}`);
+    images.forEach((img) => img.classList.remove("show"));
+    currentImage.classList.add("show");
+  
+    const textSlider = document.querySelector(".text-group");
+    textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
+  
+    bullets.forEach((bull) => bull.classList.remove("active"));
+    bullets[index - 1].classList.add("active");
+  }
+  
+  // Function to autoplay the slider
+  function autoPlay() {
+    let currentIndex = 1; // Initial index
+    const interval = setInterval(() => {
+      moveSlider(currentIndex); // Move to the next slide
+      currentIndex++; // Increment index for the next slide
+      if (currentIndex > bullets.length) {
+        currentIndex = 1; // Reset index if it exceeds the number of bullets
+      }
+    }, 3000); // Interval between slides in milliseconds (adjust as needed)
+  
+    return interval; // Return the interval ID for later reference (e.g., for stopping autoplay)
+  }
+  
+  // Start autoplay when the page loads
+  let autoplayInterval = autoPlay();
+  
+  // Pause autoplay when a bullet is clicked
+  bullets.forEach((bullet) => {
+    bullet.addEventListener("click", function() {
+      clearInterval(autoplayInterval); // Stop autoplay
+      moveSlider(parseInt(this.dataset.value)); // Move to the selected slide
+      autoplayInterval = autoPlay(); // Restart autoplay
+    });
+  });
+  
+
+  function changeProfilePicture() {
+    const image = document.getElementById('imagepro');
+    const imageInput = document.getElementById('image');    
+    const imageUrl = imageInput.value;
+    image.src = imageUrl 
+}
+
+image.addEventListener('input', () => {
+    changeProfilePicture()
+})
+
+changeProfilePicture()
+
 
 let validLength, includesLowercase, includesUppercase, includesSpecialChar, includesEmailTemplate, includesUsernameTemplate, includesNumberTemplate, validDOB;
 
@@ -184,10 +254,12 @@ function checkValidatedFields() {
 
     if (validLength && includesLowercase && includesUppercase && includesSpecialChar && includesEmailTemplate && includesUsernameTemplate && validDOB && includesNumberTemplate && passwordsMatch) {
         registerButton.removeAttribute("disabled");
+        registerButton.style.cursor = "pointer"
         registerButton.style.background = "green"
     } else {
         registerButton.setAttribute('disabled', 'disabled');
         registerButton.style.background = "lightgrey"
+        registerButton.style.cursor = "not-allowed"
     }
 }
 
@@ -212,21 +284,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 3000);
   });
 
-
-
-
-
-// changing picture function
-
-function changeProfilePicture() {
-    const image = document.getElementById('imagepro');
-    const imageInput = document.getElementById('image');    
-    const imageUrl = imageInput.value;
-    image.src = imageUrl 
-}
-
-image.addEventListener('input', () => {
-    changeProfilePicture()
-})
-
-changeProfilePicture()

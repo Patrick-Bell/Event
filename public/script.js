@@ -122,7 +122,7 @@ function chooseColor(color) {
 
 // function that checks if events length and generates relevant HTML//
 
-/*
+
 
 const checkFutureEventsLength = async (userId) => {
     try {
@@ -164,7 +164,7 @@ const checkFutureEventsLength = async (userId) => {
 
 checkFutureEventsLength()
 
-*/
+
 
 
 // function to get a color 20% darker
@@ -249,7 +249,7 @@ addEventToList.addEventListener("click", async () => {
             console.log('Testing DB', res.data)
             chooseColor(event.color); // Update UI with chosen color
             sortEventsInOrder()
-            // checkFutureEventsLength()
+            checkFutureEventsLength()
             renderPastEvents()
             renderFutureEvents()
             calculateFutureEvents()
@@ -378,7 +378,7 @@ const renderFutureEvents = async () => {
 
         sortEventsInOrder()
         attachDeleteEventListeners()
-        // checkFutureEventsLength()
+        checkFutureEventsLength()
         calculateFutureEvents()
         calculatePastEvents()   
 
@@ -457,7 +457,7 @@ const renderPastEvents = async (userId) => {
 
         sortEventsInOrder()
         attachDeleteEventListeners();
-       //  checkFutureEventsLength()
+        checkFutureEventsLength()
         calculateFutureEvents()
         calculatePastEvents()   
 
@@ -586,7 +586,7 @@ const deleteProduct = async (eventId) => {
         calculatePastEvents();
         renderFutureEvents();
         renderPastEvents();
-        // checkFutureEventsLength();
+        checkFutureEventsLength();
         // Optionally, you can perform additional actions after deleting the event
     } catch (error) {
         console.error('Error deleting event:', error);

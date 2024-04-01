@@ -1,6 +1,22 @@
 document.addEventListener("DOMContentLoaded", function() {
     renderReviews();
+    totalNumberOfRatings()
 });
+
+async function totalNumberOfRatings() {
+    try {
+        const response = await axios.get('/api/reviews');
+        const reviews = response.data;
+        const reviewsText = document.querySelector('.all-reviews'); // Target the correct element
+        const reviewsLength = reviews.length;
+        console.log(reviewsLength);
+        reviewsText.innerHTML = `View all reviews (${reviewsLength})`; // Update innerHTML
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 
 const stars = document.querySelectorAll('.stars i');
 const submitReviewBtn = document.getElementById('submit-btn');
@@ -25,13 +41,14 @@ async function renderReviews() {
         const reviewsContainer = document.getElementById('reviews-container');
         console.log('trying rendering reviews');
         console.log(reviews)
+        const sortedReviews = reviews.filter(review => review.id === "37" || review.id === "269" || review.id === "261" || review.id === "580")
         
 
         // Map through the reviews and create HTML for each review
         reviewsContainer.innerHTML = `
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    ${reviews.map(review => `
+                    ${sortedReviews.map(review => `
                         <div class="swiper-slide">
                             <div class="review__card">
                                 <img src="${review.image}">
@@ -131,8 +148,7 @@ const reviewTitleInput = document.getElementById('review-title');
 const reviewTextInput = document.getElementById('review-text');
 const titleError = document.querySelector('.review-title-error');
 const textError = document.querySelector('.review-text-error');
-let includesTextTemplate = false;
-let includesTitleTemplate = false;
+let includesTextTemplate, includesTitleTemplate;
 
 function checkReviewValidation() {
     if (includesTextTemplate && includesTitleTemplate) {
@@ -172,7 +188,7 @@ reviewTextInput.addEventListener("input", () => {
     let chars = 200;
     let left = chars - text.length;
 
-    includesTextTemplate = left >= 0 && left <= 200; // Between 10-75 characters
+    includesTextTemplate = left >= 0 && left <= 190; // Between 10-75 characters
 
     if (text.length === 0) {
         console.log('empty');
@@ -189,17 +205,5 @@ reviewTextInput.addEventListener("input", () => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+totalNumberOfRatings()
 renderReviews();

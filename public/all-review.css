@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --primary-color: #00949b;
+    --primary-color-dark: #006466;
+}
+/* review page */
+.review-heading{
+    width: 100%;
+    min-height: 50vh;
+    background: lightgrey;
+    position: relative;
+    background-image: url('/assets/speech.jpg');
+    background-position: center;
+    background-size: contain;
+    background-blend-mode: color-burn;
+}
+.heading-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    filter: blur(45);
+
+}
+img{
+    width: 100px;
+    height: 100px;
+    margin-left: 25px;
+    padding: 10px;
+}
+.back{
+    margin-right: 25px;
+}
+.text{
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 2.75rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+    color: white;
+}
+.avg-rating{
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+}
+
+.all-reviews-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.review-card{
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 20px;
+    min-height: 250px;
+    max-width: 300px;
+    position: relative;
+}
+.review-line{
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.review-name{
+    padding: 10px;
+}
+.review-title{
+    margin-top: 10px;
+    font-weight: 900;
+}
+.rating{
+    border-top: 1px solid lightgrey;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+
+/* Styles for pagination buttons */
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination-container button {
+    padding: 5px 10px;
+    margin: 10px 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    place-items: center;
+}
+
+.pagination-container button:hover {
+    background-color: #e0e0e0;
+}
+
+.pagination-container button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.selected{
+    background: var(--primary-color-dark) !important;
+    color: white;
+}
+.reviews-num{
+    text-align: center;
+    margin: 10px;
+}
+
+@media screen and (max-width: 630px) {
+    .text{
+        top: 60% ;
+    }
+    .review-heading {
+        background-size: cover;
+    }
+}

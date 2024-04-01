@@ -1,74 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/auth.css">
-    <title>Document</title>
-</head>
-<body>
-
-<form action="/register" method="POST" id="register-form">
-
-    <h1>Register</h1>
-
-
-    <% if (messages.error && messages.error.length > 0) { %>
-        <p id="error-message">
-          <%= messages.error %>
-        </p>
-      <% } %>
-
-      
-      
-      
-
-    <div class="username-error"></div>
-    <div class="number-error"></div>
-    <div class="email-error"></div>
-    <div class="birthday-error"></div>
-    <div class="password-error"></div>
-    <div class="confirm-password-error"></div>
-
-        <img src="/assets/profile.png" id="imagepro" />
-        <input type="text" id="image" name="image" placeholder="Paste image URL here">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <main>
+      <div class="box">
+        <div class="inner-box">
+          <div class="forms-wrap">
 
 
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="username" name="username" required>
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="number">Number</label>
-        <input type="number" id="number" name="number" required>
-    </div>
+            <form action="/register" method="POST" class="sign-in-form">
+              <div class="logo">
+                <img src="./assets/logo.png" class="logo" alt="easyclass" />
+              </div>
 
-    <div>
-        <label for="birthday">Birthday</label>
-        <input type="date" id="birthday" name="birthday" required>
-    </div>
+              <div class="heading">
+                <h2>Get Started</h2>
+                <h6>Already have an account?</h6>
+                <a href="/login" class="toggle">Sign in</a>
+              </div>
+
+              <% if (messages.error && messages.error.length > 0) { %>
+                <p id="error-message">
+                  <%= messages.error %>
+                </p>
+             <% } %>
+
+              <div class="actual-form">
+
+                <img id="imagepro" src="" alt="">
 
 
-    <div class="password-container">
-        <label for="password">Password</label>
-        <div class="input-wrapper">
-            <input type="password" id="password" name="password" required>
-            <p class="show_hide">show</p>
+                <div class="input-wrap">
+                    <input
+                      type="text"
+                      minlength="4"
+                      class="input-field"
+                      id="image"
+                      name="image"
+                      required
+                    />
+                    <label>Image</label>
+                  </div>
+
+
+                <div class="input-wrap">
+                  <input
+                    type="text"
+                    minlength="4"
+                    class="input-field"
+                    id="username"
+                    name="username"
+                    required
+                  />
+                  <label>Name</label>
+                </div>
+
+                <div class="username-error"></div>
+
+                <div class="input-wrap">
+                  <input
+                    type="email"
+                    minlength="4"
+                    class="input-field"
+                    name="email"
+                    id="email"
+                    required
+                  />
+                  <label>Email</label>
+                </div>
+
+                <div class="email-error"></div>
+
+
+                <div class="input-wrap">
+                    <input
+                      type="number"
+                      minlength="4"
+                      class="input-field"
+                      name="number"
+                      id="number"
+                      required
+                    />
+                    <label>Number</label>
+                  </div>
+
+                  <div class="number-error"></div>
+
+
+                  <div class="input-wrap">
+                    <input
+                      type="date"
+                      minlength="4"
+                      class="input-field"
+                      name="birthday"
+                      id="birthday"
+                      required
+                    />
+                    <label></label>
+                  </div>
+
+                  <div class="birthday-error"></div>
+
+
+                  <div class="input-wrap">
+                    <input
+                      type="password"
+                      minlength="4"
+                      class="input-field"
+                      name="password"
+                      id="password"
+                      required
+                    />
+                    <label>Password</label>
+                  </div>
+
+                  <div class="password-error"></div>
+
+
+                  <div class="input-wrap">
+                    <input
+                      type="password"
+                      minlength="4"
+                      class="input-field"
+                      id="confirm-password"
+                      name="confirm-password"
+                      required
+                    />
+                    <label>Confirm Password</label>
+                  </div>
+
+                  <div class="confirm-password-error"></div>
+
+
+                <input type="submit" value="Register" id="register-btn" class="sign-btn" disabled />
+
+                <p class="text">
+                  Forgotten your password or you login datails?
+                  <a href="#">Get help</a> signing in
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <div class="carousel">
+            <div class="images-wrapper">
+              <img src="./assets/img1.jpg" class="image img-1 show" alt="" />
+              <img src="./assets/img3.jpg" class="image img-2" alt="" />
+              <img src="./assets/img2.jpg" class="image img-3" alt="" />
+            </div>
+
+            <div class="text-slider">
+              <div class="text-wrap">
+                <div class="text-group">
+                  <h2>Never forget another event again!</h2>
+                  <h2>Great customization and relax!</h2>
+                  <h2>Always be on top of upcoming events!</h2>
+                </div>
+              </div>
+
+              <div class="bullets">
+                <span class="active" data-value="1"></span>
+                <span data-value="2"></span>
+                <span data-value="3"></span>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <div>
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" required>
-    </div>
-    <button type="submit" class="btn" id="register-btn" disabled>Register</button>
-    <div class="or">OR</div>
-    <a class="btn tologin" href="/login">Login</a>
-</form>
+      </div>
+    </main>
 
-<script src="/auth.js"></script>
-</body>
+    <!-- Javascript file -->
+
+    <script src="/auth.js"></script>
+  </body>
 </html>

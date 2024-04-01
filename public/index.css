@@ -93,7 +93,8 @@ nav {
 }
 
 .nav__logo a img {
-  max-width: 50px;
+  max-width: 120px;
+  background: transparent;
 }
 
 .nav__logo .logo-color {
@@ -438,11 +439,8 @@ nav {
 
 /* pagination swiper */
 .swiper-pagination {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
+  position: relative;
+  margin-top: 20px;
 }
 
 .swiper-pagination-bullet {
