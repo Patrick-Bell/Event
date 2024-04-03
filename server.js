@@ -13,7 +13,7 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
-const { updateEventStatus, sendEmailReminder } = require('./event-handle');
+const { updateEventStatus, sendEmailReminder, sendWeeklyReport } = require('./event-handle');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const nodemailer = require('nodemailer')
 const cron = require('node-cron')
@@ -285,6 +285,10 @@ cron.schedule('10 0 * * *', () => {
   sendEmailReminder();
   console.log('emails?')
 });
+
+cron.schedule('0 18 * * 3', () => {
+  sendWeeklyReport()
+})
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
