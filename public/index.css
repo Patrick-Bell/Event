@@ -319,6 +319,7 @@ nav {
   color: var(--white);
   background-color: var(--text-dark);
   border-radius: 100%;
+  margin-top: 20px;
 }
 
 .footer__socials a:hover {
@@ -348,6 +349,10 @@ nav {
 .review-text{
   font-size: 0.8rem;
   line-height: -10px;
+}
+
+.footer-logo{
+  transform: scale(2);
 }
 
 

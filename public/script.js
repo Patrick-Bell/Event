@@ -252,8 +252,8 @@ addEventToList.addEventListener("click", async () => {
             checkFutureEventsLength()
             renderPastEvents()
             renderFutureEvents()
-            calculateFutureEvents()
-            calculatePastEvents()
+            calculateEvents('future');
+            calculateEvents('past');
             resetEventForm()
             addEventModal.close();
         } else {
@@ -379,8 +379,7 @@ const renderFutureEvents = async () => {
         sortEventsInOrder()
         attachDeleteEventListeners()
         checkFutureEventsLength()
-        calculateFutureEvents()
-        calculatePastEvents()   
+        calculateEvents('future');
 
     } catch (error) {
         console.error('Error fetching and rendering future events:', error);
@@ -458,8 +457,7 @@ const renderPastEvents = async (userId) => {
         sortEventsInOrder()
         attachDeleteEventListeners();
         checkFutureEventsLength()
-        calculateFutureEvents()
-        calculatePastEvents()   
+        calculateEvents('past');  
 
     } catch (error) {
         console.error('Error fetching and rendering future events:', error);
@@ -473,34 +471,31 @@ renderPastEvents()
 
 // calculate the number of events in each category
 
-const calculateFutureEvents = async (userId) => {
-    try{
-        const response = await axios.get('/api/future-events');
-        const events = response.data;
-        const numOfFutureEvents = document.querySelector('.future-events-num')
-        const futureEventsNum = events.length;
-        numOfFutureEvents.innerHTML = `Future (${futureEventsNum})`
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-const calculatePastEvents = async (userId) => {
+const calculateEvents = async (eventType) => {
     try {
-        const response =  await axios.get('/api/past-events');
-        const events = response.data
-        const numOfPastEvents = document.querySelector('.past-events-num')
-        const pastEventsNum = events.length;
-        numOfPastEvents.innerHTML = `Past (${pastEventsNum})`
+        let endpoint = '/api/future-events';
+        let containerSelector = '.future-events-num';
+        let eventLabel = 'Future';
 
-    } catch (error)
-    {
-        console.log(error)
- }}
+        if (eventType === 'past') {
+            endpoint = '/api/past-events';
+            containerSelector = '.past-events-num';
+            eventLabel = 'Past';
+        }
 
- calculateFutureEvents()
- calculatePastEvents()
+        const response = await axios.get(endpoint);
+        const events = response.data;
+        const numOfEvents = document.querySelector(containerSelector);
+        const eventsNum = events.length;
+        numOfEvents.innerHTML = `${eventLabel} (${eventsNum})`;
+    } catch (error) {
+        console.error(`Error calculating ${eventType} events:`, error);
+    }
+};
+
+calculateEvents('future');
+calculateEvents('past');
+
 
 // validation
 
@@ -582,8 +577,8 @@ const deleteProduct = async (eventId) => {
         console.log('Sending this event to delete to the server', eventId)
 
         // Event deleted successfully, update UI
-        calculateFutureEvents();
-        calculatePastEvents();
+        calculateEvents('future');
+        calculateEvents('past');
         renderFutureEvents();
         renderPastEvents();
         checkFutureEventsLength();

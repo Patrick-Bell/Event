@@ -44,11 +44,6 @@ updateEventStatus();
 
 const sendEmailReminder = async () => {
     try {
-        const now = new Date();
-        const midnight = new Date(now);
-        midnight.setHours(0, 10, 0, 0); // Set time to 12:10 AM
-        
-        if (now.getTime() === midnight.getTime()) { // Check if it's midnight
             // Find all events
             const events = await EventModel.find();
 
@@ -66,7 +61,7 @@ const sendEmailReminder = async () => {
                     });
 
                     const eventDate = new Date(event.date);
-                    const formattedDate = eventDate.toLocaleString('en-US', { timeZone: 'UTC', dateStyle: 'long' });               
+                    const formattedDate = eventDate.toLocaleString('en-US', { dateStyle: 'long' });               
                     const emailContent = `<p>Hi ${event.createdByUser}</p><br>
                     You have an upcoming event tomorrow!<br><br>
                     <strong>When?</strong> ${formattedDate}<br><br>
@@ -94,18 +89,11 @@ const sendEmailReminder = async () => {
                     console.log('no email reminder');
                 }
             }
-        }
+        
     } catch (error) {
         console.error('Error sending email reminders:', error);
     }
-
-    // Schedule the next update for the next day at midnight
-    const now = new Date();
-    const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now;
-    setTimeout(sendEmailReminder, millisTillMidnight)
-};
-
-sendEmailReminder();
+}
 
 module.exports = { updateEventStatus, sendEmailReminder };
 

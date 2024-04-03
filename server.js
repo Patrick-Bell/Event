@@ -281,8 +281,10 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-cron.schedule('30 12 * * *', sendEmailReminder);
-
+cron.schedule('10 0 * * *', () => {
+  sendEmailReminder();
+  console.log('emails?')
+});
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
