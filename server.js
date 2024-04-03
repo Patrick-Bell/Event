@@ -16,6 +16,7 @@ const methodOverride = require('method-override');
 const { updateEventStatus, sendEmailReminder } = require('./event-handle');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const nodemailer = require('nodemailer')
+const cron = require('node-cron')
 
 
 const bodyParser = require('body-parser')
@@ -266,8 +267,6 @@ app.delete('/api/events/:id', checkAuthenticated, async (req, res) => {
 })
 
 
-
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -281,6 +280,9 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
+
+cron.schedule('30 12 * * *', sendEmailReminder);
+
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');

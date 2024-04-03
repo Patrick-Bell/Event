@@ -46,7 +46,7 @@ const sendEmailReminder = async () => {
     try {
         const now = new Date();
         const midnight = new Date(now);
-        midnight.setHours(24, 0, 0, 0); // Set time to midnight
+        midnight.setHours(0, 10, 0, 0); // Set time to 12:10 AM
         
         if (now.getTime() === midnight.getTime()) { // Check if it's midnight
             // Find all events

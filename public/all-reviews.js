@@ -33,6 +33,7 @@ async function renderReviewsOnPage(pageNumber = 1, pageSize = 3) {
 
         // Calculate total number of pages
         const totalPages = Math.ceil(reviews.length / pageSize);
+        console.log(totalPages)
 
         if (endIndex > reviews.length) {
             endIndex = reviews.length;
@@ -73,9 +74,6 @@ async function renderReviewsOnPage(pageNumber = 1, pageSize = 3) {
                 scrollToTop()
             });
             console.log(pageButton)
-
-            // Add a class to identify page buttons
-            pageButton.classList.add('button');
 
             // Add the 'selected' class to the current page button
             if (i === pageNumber) {
