@@ -281,12 +281,12 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-cron.schedule('10 0 * * *', () => {
+cron.schedule('5 0 * * *', () => {
   sendEmailReminder();
   console.log('emails?')
 });
 
-cron.schedule('0 18 * * 3', () => {
+cron.schedule('0 12 * * 1', () => {
   sendWeeklyReport()
 })
 
