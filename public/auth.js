@@ -1,4 +1,4 @@
-const passwordInput = document.getElementById('password');
+let passwordInput = document.getElementById('password');
 const usernameInput = document.getElementById('username');
 const numberInput = document.getElementById('number');
 const birthdayInput = document.getElementById('birthday')
@@ -6,7 +6,7 @@ const birthdayError = document.querySelector('.birthday-error')
 const passwordError = document.querySelector(".password-error");
 const usernameError = document.querySelector(".username-error");
 const numberError = document.querySelector(".number-error")
-const emailInput = document.getElementById("email");
+let emailInput = document.getElementById("email");
 const emailError = document.querySelector(".email-error");
 const registerButton = document.querySelector("#register-btn");
 const confirmPasswordInput = document.getElementById('confirm-password');
@@ -16,8 +16,6 @@ const inputs = document.querySelectorAll(".input-field");
 const main = document.querySelector("main");
 const bullets = document.querySelectorAll(".bullets span");
 const images = document.querySelectorAll(".image");
-
-
 
 inputs.forEach((inp) => {
   inp.addEventListener("focus", () => {
@@ -283,4 +281,3 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }, 3000);
   });
-

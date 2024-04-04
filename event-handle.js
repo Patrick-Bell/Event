@@ -3,6 +3,7 @@ const UserModel = require('./models/user')
 const ReviewModel = require('./models/review')
 const nodemailer = require('nodemailer')
 
+
 const updateEventStatus = async () => {
     try {
         const currentTime = new Date();

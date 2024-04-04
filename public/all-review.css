@@ -36,6 +36,11 @@ img{
 }
 .back{
     margin-right: 25px;
+    text-decoration: none;
+    color: black;
+}
+.back:hover{
+    transform: scale(1.25);
 }
 .text{
     top: 70%;

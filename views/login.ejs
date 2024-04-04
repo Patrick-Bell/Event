@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="x-icon" href="/assets/logo.png">
     <title>TimeTicker | Log in</title>
     <link rel="stylesheet" href="auth.css" />
@@ -15,13 +16,17 @@
           <div class="forms-wrap">
             <form action="/login" method="POST" class="sign-in-form">
               <div class="logo">
-                <img src="./assets/logo.png" class="logo" alt="easyclass" />
+                <a href="/"><img src="./assets/logo.png" class="logo" alt="easyclass" /></a>
               </div>
 
               <div class="heading">
                 <h2>Welcome Back</h2>
                 <h6>Not registred yet?</h6>
                 <a href="/register" class="toggle">Sign up</a>
+              </div>
+              <div class="heading">
+                <i class='bx bx-calendar-exclamation'></i>
+                <h6 class="example-acc-text">Click here to use example account.</h6>
               </div>
 
               <% if (messages.error && messages.error.length > 0) { %>
@@ -40,7 +45,7 @@
                     id="email"
                     required
                   />
-                  <label>Name</label>
+                  <label>Email</label>
                 </div>
 
                 <div class="input-wrap">
@@ -98,7 +103,10 @@
       setTimeout(function() {
         document.getElementById('error-message').style.display = "none"
       }, 3000)
+  
+
     </script>
     <script src="auth.js"></script>
+    <script src="acc.js"></script>
   </body>
 </html>

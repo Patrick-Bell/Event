@@ -286,7 +286,7 @@ cron.schedule('5 0 * * *', () => {
   console.log('emails?')
 });
 
-cron.schedule('0 12 * * 1', () => {
+cron.schedule('0 10 * * 1', () => {
   sendWeeklyReport()
 })
 

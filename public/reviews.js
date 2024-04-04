@@ -10,7 +10,7 @@ async function totalNumberOfRatings() {
         const reviewsText = document.querySelector('.all-reviews'); // Target the correct element
         const reviewsLength = reviews.length;
         console.log(reviewsLength);
-        reviewsText.innerHTML = `View all reviews (${reviewsLength})`; // Update innerHTML
+        reviewsText.innerHTML = `View all reviews <strong>(${reviewsLength})</strong>`; // Update innerHTML
     } catch (error) {
         console.error(error);
     }

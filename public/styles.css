@@ -210,9 +210,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 /* side menu */
-ul:nth-child(2){
-    color: gold;
-}
 .side-menu{
     position: absolute;
     background: rgb(47, 46, 46);
@@ -234,9 +231,30 @@ ul{
     margin: 5px 0 5px 0;
     padding: 15px;
     border-bottom: 1px solid grey;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
 }
 ul i {
     margin: 0 7.5px 0 0;
+}
+.side-menu li ul, a{
+    text-decoration: none;
+    color: white;
+}
+ul:nth-child(2){
+    color: gold !important;
+}
+
+.log-out-btn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+
 }
 
 

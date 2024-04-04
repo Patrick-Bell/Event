@@ -335,9 +335,21 @@ main.sign-up-mode .carousel {
     position: absolute;
     right: 10px;
 }
+.example-acc-text, .bx-calendar-exclamation{
+  color: red !important;
+  font-weight: 900 !important;
+  cursor: pointer;
+}
 
 
+.hide-labels{
+  display: none;
+}
 
+
+.actual-form{
+  margin-top: 20px;
+}
 
 
 
@@ -378,8 +390,8 @@ main.sign-up-mode .carousel {
       transition: transform 0.8s ease-in-out, opacity 0.45s linear;
     }
   
-    .heading {
-      margin: 2rem 0;
+    .heading:nth-child(2) {
+      margin: 2rem 0 0 0;
     }
   
     .carousel {
