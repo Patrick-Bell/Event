@@ -47,57 +47,62 @@ updateEventStatus();
 
 const sendEmailReminder = async () => {
     try {
-            // Find all events
-            const events = await EventModel.find();
+        // Find all events
+        const events = await EventModel.find();
 
-            // Iterate through each event
-            for (const event of events) {
-                if (event.days === '1') { // Assuming 'days' is stored as a string
-                    console.log('email reminder');
+        // Iterate through each event
+        for (const event of events) {
+            const eventDate = new Date(event.date);
+            const today = new Date();
+            const oneDayBeforeEvent = new Date(eventDate);
+            oneDayBeforeEvent.setDate(oneDayBeforeEvent.getDate() - 1);
 
-                    const transporter = nodemailer.createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: process.env.USER,
-                            pass: process.env.PASS
-                        }
-                    });
+            // Check if the event is in the future and one day away
+            if (eventDate > today && oneDayBeforeEvent <= today) {
+                console.log('email reminder');
 
-                    const eventDate = new Date(event.date);
-                    const formattedDate = eventDate.toLocaleString('en-US', { dateStyle: 'long' });               
-                    const emailContent = `<p>Hi ${event.createdByUser}</p><br>
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.USER,
+                        pass: process.env.PASS
+                    }
+                });
+
+                const formattedDate = eventDate.toLocaleString('en-US', { dateStyle: 'long' });
+                const emailContent = `<p>Hi ${event.createdByUser}</p><br>
                     You have an upcoming event tomorrow!<br><br>
                     <strong>When?</strong> ${formattedDate}<br><br>
                     <strong>What?</strong> ${event.title} - ${event.subtitle}<br><br>
                     Enjoy!<br><br>
                     Time Ticker Team<br>
-                    https://timetickeronrender.com`
-                    ;
+                    https://timetickeronrender.com`;
 
-                    const userEventReminder = {
-                        from: process.env.USER,
-                        to: event.createdByEmail,
-                        subject: `Event Reminder - ${formattedDate}`,
-                        html: emailContent
-                    };
+                const userEventReminder = {
+                    from: process.env.USER,
+                    to: event.createdByEmail,
+                    subject: `Event Reminder - ${formattedDate}`,
+                    html: emailContent
+                };
 
-                    transporter.sendMail(userEventReminder, (error, info) => {
-                        if (error) {
-                            console.error('Error sending email:', error);
-                        } else {
-                            console.log('Reminder sent');
-                        }
-                    });
-                } else {
-                    console.log('no email reminder');
-                }
+                transporter.sendMail(userEventReminder, (error, info) => {
+                    if (error) {
+                        console.error('Error sending email:', error);
+                    } else {
+                        console.log('Reminder sent');
+                    }
+                });
+            } else {
+                console.log('no email reminder');
             }
-        
+        }
     } catch (error) {
         console.error('Error sending email reminders:', error);
     }
 }
 
+// Call sendEmailReminder periodically or whenever needed
+sendEmailReminder();
 
 
 

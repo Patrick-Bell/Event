@@ -73,7 +73,7 @@ closeAddEventModal.addEventListener("click", () => {
     addEventModal.close();
 });
 
-const sortEventsInOrder = async (userId) => {
+const sortEventsInOrder = async () => {
     const response = await axios.get('/api/events');
     const events = response.data;
 
@@ -93,9 +93,10 @@ const sortEventsInOrder = async (userId) => {
     pastEvents.sort((a, b) => b.days - a.days);
 
     // Render events based on the updated categorization
-    renderFutureEvents(futureEvents);
-    renderPastEvents(pastEvents);
+
 };
+
+sortEventsInOrder()
 
 
 const colorChosen = document.getElementById('color');
@@ -389,7 +390,7 @@ const renderFutureEvents = async () => {
 
 // rendering the past events
 
-const renderPastEvents = async (userId) => {
+const renderPastEvents = async () => {
     try {
         const response = await axios.get('/api/past-events');
         const events = response.data;
@@ -577,11 +578,9 @@ const deleteProduct = async (eventId) => {
         console.log('Sending this event to delete to the server', eventId)
 
         // Event deleted successfully, update UI
-        calculateEvents('future');
-        calculateEvents('past');
         renderFutureEvents();
         renderPastEvents();
-        checkFutureEventsLength();
+     
         // Optionally, you can perform additional actions after deleting the event
     } catch (error) {
         console.error('Error deleting event:', error);
