@@ -231,7 +231,13 @@ addEventToList.addEventListener("click", async () => {
     console.log("Difference in days:", differenceInDays);
 
     let daysRemaining = differenceInDays;
-    let status = 'future'
+    let status
+
+    if (daysRemaining >= 0) {
+        status = 'future'
+    } else {
+        status = 'past'
+    }
 
 
     const event = {
@@ -241,7 +247,7 @@ addEventToList.addEventListener("click", async () => {
         date: eventDate,
         days: daysRemaining,
         color: colorChosen.value,
-        status: status
+        status: status,
 
     };
 
