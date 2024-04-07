@@ -233,11 +233,7 @@ addEventToList.addEventListener("click", async () => {
     let daysRemaining = differenceInDays;
     let status = 'future'
 
-    if (differenceInDays >= 0) {
-        status = 'future'
-    } else {
-        status = 'past'
-    }
+
     const event = {
         id: generateRandomID(),
         title: title,

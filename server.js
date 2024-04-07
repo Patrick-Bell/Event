@@ -289,8 +289,12 @@ cron.schedule('5 0 * * *', () => {
   console.log('emails?')
 });
 
-cron.schedule('0 10 * * 1', () => {
+cron.schedule('0 11 * * 1', () => {
   sendWeeklyReport()
+})
+
+cron.schedule('1 0 * * * *', () => {
+  updateEventStatus()
 })
 
 app.listen(3000, () => {
