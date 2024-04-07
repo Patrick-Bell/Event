@@ -232,6 +232,12 @@ addEventToList.addEventListener("click", async () => {
 
     let daysRemaining = differenceInDays;
 
+    let status = 'future'
+
+    if (differenceInDays < 0 ) {
+        status = 'past'
+    }
+
     const event = {
         id: generateRandomID(),
         title: title,
@@ -239,7 +245,7 @@ addEventToList.addEventListener("click", async () => {
         date: eventDate,
         days: daysRemaining,
         color: colorChosen.value,
-        status: 'future'
+        status: status
 
     };
 
