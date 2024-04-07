@@ -232,9 +232,11 @@ addEventToList.addEventListener("click", async () => {
 
     let daysRemaining = differenceInDays;
 
-    let status = 'past'
+    let status = 'future'
 
-    if (differenceInDays >= 0 ) {
+    if (differenceInDays < 0) {
+        status = 'past'
+    } else {
         status = 'future'
     }
 
