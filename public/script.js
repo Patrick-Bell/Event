@@ -227,20 +227,17 @@ addEventToList.addEventListener("click", async () => {
     eventDate.setHours(0, 0, 0, 0);
 
     const diff = eventDate.getTime() - timeNow.getTime();
-    const differenceInDays = diff / (1000 * 60 * 60 * 24);
+    const differenceInDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
     console.log("Difference in days:", differenceInDays);
 
     let daysRemaining = differenceInDays;
-    let status;
+    let status
 
-    if (differenceInDays > 0) {
+    if (differenceInDays >= 0) {
         status = 'future'
-    } else if (differenceInDays < 0) {
-        status = 'past'
     } else {
-        status = 'future'
+        status = 'past'
     }
-
     const event = {
         id: generateRandomID(),
         title: title,
