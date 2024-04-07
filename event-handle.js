@@ -102,7 +102,6 @@ const sendEmailReminder = async () => {
 }
 
 // Call sendEmailReminder periodically or whenever needed
-sendEmailReminder();
 
 
 

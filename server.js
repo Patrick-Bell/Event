@@ -284,17 +284,19 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-cron.schedule('5 0 * * *', () => {
+cron.schedule('1 0 * * *', () => {
   sendEmailReminder();
-  console.log('emails?')
+  console.log('send emails')
 });
 
 cron.schedule('0 11 * * 1', () => {
   sendWeeklyReport()
+  console.log('send weekly report')
 })
 
 cron.schedule('1 0 * * * *', () => {
   updateEventStatus()
+  console.log('updating status')
 })
 
 app.listen(3000, () => {
