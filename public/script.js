@@ -231,7 +231,7 @@ addEventToList.addEventListener("click", async () => {
     console.log("Difference in days:", differenceInDays);
 
     let daysRemaining = differenceInDays;
-    let status
+    let status = 'future'
 
     if (differenceInDays >= 0) {
         status = 'future'

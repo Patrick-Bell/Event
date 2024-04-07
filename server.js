@@ -115,6 +115,7 @@ app.get('/api/events', checkAuthenticated, async (req, res) => {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId });
     res.status(200).json(events)
+    updateEventStatus()
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal Server Error'})
@@ -126,6 +127,7 @@ app.get('/api/past-events', checkAuthenticated, async (req, res) => {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId, status: 'past' });
     res.status(200).json(events);
+    updateEventStatus()
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -137,6 +139,7 @@ app.get('/api/future-events', checkAuthenticated, async (req, res) => {
     const userId = req.user._id;
     const events = await EventModel.find({ createdBy: userId, status: 'future' });
     res.status(200).json(events);
+    updateEventStatus()
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
