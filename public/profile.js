@@ -1,12 +1,10 @@
 const eventClick = document.querySelector('.events-show');
 const profileClick = document.querySelector('.profile-show');
-const customizationClick = document.querySelector('.customization-show');
 const reviewClick = document.querySelector('.reviews-show');
 
 
 const profileTab = document.querySelector('.profile-tab');
 const eventTab = document.querySelector('.event-tab');
-const customizationTab = document.querySelector('.customization-tab');
 const reviewTab = document.querySelector('.review-tab')
 
 
@@ -16,28 +14,18 @@ const totalEvents = document.getElementById('total-events');
 
 eventClick.addEventListener("click", () => {
     profileTab.style.display = "none";
-    customizationTab.style.display = "none"
     reviewTab.style.display = "none"
     eventTab.style.display = "block"
 })
 
 profileClick.addEventListener("click", () => {
     eventTab.style.display = "none";
-    customizationTab.style.display = "none"
     reviewTab.style.display = "none"
     profileTab.style.display = "block"
 })
 
-customizationClick.addEventListener("click", () => {
-    profileTab.style.display = "none";
-    eventTab.style.display = "none";
-    reviewTab.style.display = "none"
-    customizationTab.style.display = "block"
-})
-
 reviewClick.addEventListener("click", () => {
     profileTab.style.display = "none";
-    customizationTab.style.display = "none"
     eventTab.style.display = "none"
     reviewTab.style.display = "block"
 })
